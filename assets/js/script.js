@@ -1,13 +1,19 @@
 // THE ANSWER
 var the_answer = "ADELE";
-var guess = "";
 
 //comparing the guess to the answer
-function doCompare(guess) {
-	// alert(the_answer + " - " + guess);
+function doCompare() {
+	
+	let answers = $(".ans");
+	let guess = "";
 
+	for(let a = 0; a < answers.length; a++) {
+		if(answers[a].innerHTML != "") {
+			guess += answers[a].innerHTML;
+		}
+	}
+	
 	if(the_answer == guess) {
-		// alert("CORRECT!");
 		$(".correct").css("visibility", "visible");
 	}
 } 
@@ -25,13 +31,25 @@ for(let x = 0; x < choices.length; x++) {
 
 				if($(str).text() == "") {
 					$(str).text(y);
-					guess += y;
-					doCompare(guess);
+					doCompare();
 					break;
 				}				
 			}
 
-			$(this).text("");
+			//check so i can't select more than 5 letters from selection
+			let answers = $(".ans");
+			let count = 0;
+	
+			for(let a = 0; a < answers.length; a++) {
+				if(answers[a].innerHTML != "") {
+					count++;
+				}
+			}
+
+			if(count != 5) {
+				$(this).text("");
+			}
+
 		}
 	);
 }
